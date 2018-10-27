@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">OnBoard</string>
+    <string name="next">Next</string>
+    <string name="welcome">Welcome To OnBoard</string>
+    <string name="content">create amazing on board screens for all your users</string>
+    <string name="image">image</string>
+</resources>
