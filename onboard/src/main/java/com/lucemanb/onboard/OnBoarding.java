@@ -1,6 +1,5 @@
 package com.lucemanb.onboard;
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
@@ -23,7 +22,7 @@ public class OnBoarding extends AppCompatActivity {
 
     private ViewPager viewPager;
     private LinearLayout dotsLayout;
-    private Button btnNext;
+    private Button btnNext, btnBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +41,7 @@ public class OnBoarding extends AppCompatActivity {
         viewPager = findViewById(R.id.view_pager);
         dotsLayout = findViewById(R.id.layoutDots);
         btnNext = findViewById(R.id.btn_next);
+        btnBack = findViewById(R.id.btn_previous);
 
         btnNext.setText(OnBoard.nextText);
         addBottomDots(0);
@@ -63,6 +63,9 @@ public class OnBoarding extends AppCompatActivity {
                 } else {
                     btnNext.setText(OnBoard.nextText);
                 }
+
+                if (position!=0)btnBack.setVisibility(View.VISIBLE);
+                else btnBack.setVisibility(View.GONE);
             }
 
             @Override
@@ -84,6 +87,16 @@ public class OnBoarding extends AppCompatActivity {
             }
         });
 
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int current = viewPager.getCurrentItem() - 1;
+                if (current > 0) {
+                    viewPager.setCurrentItem(current);
+                }
+            }
+        });
+
     }
     public class mViewPagerAdapter extends PagerAdapter {
 
@@ -95,11 +108,8 @@ public class OnBoarding extends AppCompatActivity {
         @NonNull
         @Override
         public Object instantiateItem(@NonNull ViewGroup container, int position) {
-            layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            assert layoutInflater != null;
-            View view = layoutInflater.inflate(OnBoard.layouts[position], container, false);
-            container.addView(view);
-            return view;
+            container.addView(OnBoard.layouts[position]);
+            return OnBoard.layouts[position];
         }
 
         @Override

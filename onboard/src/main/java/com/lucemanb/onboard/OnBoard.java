@@ -1,11 +1,14 @@
 package com.lucemanb.onboard;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.view.LayoutInflater;
+import android.view.View;
 
 public class OnBoard {
 
-    public static int[] layouts;
+    public static View[] layouts;
     public static int colorActive;
     public static int colorInactive;
     public static String nextText = "Next";
@@ -24,7 +27,7 @@ public class OnBoard {
         OnBoard.aClass = aClass;
     }
 
-    public OnBoard(int[] layouts,int colorActive,int colorInactive, Class aClass) {
+    public OnBoard(View[] layouts,int colorActive,int colorInactive, Class aClass) {
         OnBoard.layouts = layouts;
         OnBoard.colorActive = colorActive;
         OnBoard.colorInactive = colorInactive;
@@ -35,8 +38,8 @@ public class OnBoard {
         activity.startActivity(new Intent(activity, OnBoarding.class));
     }
 
-    public static int getSampleLayout(){
-        return R.layout.onboard_sample_1;
+    public static View getSampleLayout(Context context){
+        return LayoutInflater.from(context).inflate(R.layout.onboard_sample_1, null);
     }
 
 }
